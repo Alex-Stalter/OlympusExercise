@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "OlympusExercise": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
