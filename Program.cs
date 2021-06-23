@@ -11,21 +11,31 @@ namespace OlympusExercise
         public static Mutex sharedResource = new Mutex();
         public static void threadWrite()
         {
-            
-            for(int i = 0; i < 10; i++)
+            try
             {
-                sharedResource.WaitOne();
-                var lastInput = File.ReadLines("/log/out.txt").Last();
-                string[] splitInput = lastInput.Split(',');
-                int count = Int32.Parse(splitInput[0]);
-                count++;
-                using StreamWriter file = new("/log/out.txt", append: true);
-                int threadid = Thread.CurrentThread.ManagedThreadId;
-                file.WriteLine(count+", "+ threadid + ", " + DateTime.Now.ToString("HH:mm:ss.fff"));
-                file.Close();
-                sharedResource.ReleaseMutex();
+                for (int i = 0; i < 10; i++)
+                {
+                    sharedResource.WaitOne();
+                    var lastInput = File.ReadLines("/log/out.txt").Last();
+                    string[] splitInput = lastInput.Split(',');
+                    int count = Int32.Parse(splitInput[0]);
+                    count++;
+                    using StreamWriter file = new("/log/out.txt", append: true);
+                    int threadid = Thread.CurrentThread.ManagedThreadId;
+                    file.WriteLine(count + ", " + threadid + ", " + DateTime.Now.ToString("HH:mm:ss.fff"));
+                    file.Close();
+                    sharedResource.ReleaseMutex();
+
+                }
+
 
             }
+            catch(Exception e) {
+
+                Console.WriteLine(e);
+            
+            }
+            
             
         }
     }
@@ -34,19 +44,43 @@ namespace OlympusExercise
 
         static void Main(string[] args) {
 
-        if (!Directory.Exists("/log"))
-        {
+            try
+            {
 
-            Directory.CreateDirectory("/log");
-        }
+                if (!Directory.Exists("/log"))
+                {
 
-        if (File.Exists("/log/out.txt"))
-        {
-            File.Delete("/log/out.txt");
-        }
-        using StreamWriter file = new("/log/out.txt", append: true);
-        file.WriteLine(0 + ", " + 0 + ", " + DateTime.Now.ToString("HH:mm:ss.fff"));
-        file.Close();
+                    Directory.CreateDirectory("/log");
+                }
+
+
+            }
+            catch (Exception e) {
+
+                Console.WriteLine(e);
+            
+            }
+
+        
+
+            try
+            {
+
+                if (File.Exists("/log/out.txt"))
+                {
+                    File.Delete("/log/out.txt");
+                }
+                using StreamWriter file = new("/log/out.txt", append: true);
+                file.WriteLine(0 + ", " + 0 + ", " + DateTime.Now.ToString("HH:mm:ss.fff"));
+                file.Close();
+
+
+            }
+            catch (Exception e) {
+
+                Console.WriteLine(e);
+            }
+        
 
 
         Thread trd0 = new Thread(Program.threadWrite);
