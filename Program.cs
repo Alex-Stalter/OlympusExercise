@@ -33,55 +33,53 @@ namespace OlympusExercise
     public class driver {
 
         static void Main(string[] args) {
-            try {
 
-                if (!Directory.Exists("/log"))
-                {
+        if (!Directory.Exists("/log"))
+        {
 
-                    Directory.CreateDirectory("/log");
-                }
+            Directory.CreateDirectory("/log");
+        }
 
-                if (File.Exists("/log/out.txt"))
-                {
-                    File.Delete("/log/out.txt");
-                }
-                using StreamWriter file = new("/log/out.txt", append: true);
-                file.WriteLine(0 + ", " + 0 + ", " + DateTime.Now.ToString("HH:mm:ss.fff"));
-                file.Close();
-
-
-                Thread trd0 = new Thread(Program.threadWrite);
-                Thread trd1 = new Thread(Program.threadWrite);
-                Thread trd2 = new Thread(Program.threadWrite);
-                Thread trd3 = new Thread(Program.threadWrite);
-                Thread trd4 = new Thread(Program.threadWrite);
-                Thread trd5 = new Thread(Program.threadWrite);
-                Thread trd6 = new Thread(Program.threadWrite);
-                Thread trd7 = new Thread(Program.threadWrite);
-                Thread trd8 = new Thread(Program.threadWrite);
-                Thread trd9 = new Thread(Program.threadWrite);
-                trd0.Start();
-                trd1.Start();
-                trd2.Start();
-                trd3.Start();
-                trd4.Start();
-                trd5.Start();
-                trd6.Start();
-                trd7.Start();
-                trd8.Start();
-                trd9.Start();
+        if (File.Exists("/log/out.txt"))
+        {
+            File.Delete("/log/out.txt");
+        }
+        using StreamWriter file = new("/log/out.txt", append: true);
+        file.WriteLine(0 + ", " + 0 + ", " + DateTime.Now.ToString("HH:mm:ss.fff"));
+        file.Close();
 
 
+        Thread trd0 = new Thread(Program.threadWrite);
+        Thread trd1 = new Thread(Program.threadWrite);
+        Thread trd2 = new Thread(Program.threadWrite);
+        Thread trd3 = new Thread(Program.threadWrite);
+        Thread trd4 = new Thread(Program.threadWrite);
+        Thread trd5 = new Thread(Program.threadWrite);
+        Thread trd6 = new Thread(Program.threadWrite);
+        Thread trd7 = new Thread(Program.threadWrite);
+        Thread trd8 = new Thread(Program.threadWrite);
+        Thread trd9 = new Thread(Program.threadWrite);
+        trd0.Start();
+        trd1.Start();
+        trd2.Start();
+        trd3.Start();
+        trd4.Start();
+        trd5.Start();
+        trd6.Start();
+        trd7.Start();
+        trd8.Start();
+        trd9.Start();
 
-            }
-            finally {
-                Console.WriteLine("All threads have finished proccessing... \n Press any key to continue");
-                Console.ReadLine();
-            
-            
-           }
+
 
             
+      
+        Console.WriteLine("All threads have finished proccessing... \nPress any key to continue");
+        Console.ReadLine();
+
+
+
+
         }
 
 
